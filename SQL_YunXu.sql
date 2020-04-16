@@ -49,15 +49,16 @@ OR jobTitle Like '%Manager%';
 SELECT orderNumber, (quantityOrdered*priceEach) as orderValue FROM orderdetails 
 WHERE quantityOrdered*priceEach > 5000
 ORDER BY orderNumber;
-One to many relationship
 
--- $Report the account representative for each customer.$
--- 1. Report total payments for Atelier graphique.
--- 2. Report the total payments by date
--- 3. Report the products that have not been sold.
--- 4. List the amount paid by each customer.
--- 5. How many orders have been placed by Herkku Gifts?
--- 6. Who are the employees in Boston?
--- 7. Report those payments greater than $100,000. Sort the report so the customer who made the highest payment appears first.
--- 8. List the value of 'On Hold' orders.
--- 9. Report the number of orders 'On Hold' for each customer.
+
+-- $One to many relationship$
+-- 1. Report the account representative for each customer.
+-- 2. Report total payments for Atelier graphique.
+-- 3. Report the total payments by date
+-- 4. Report the products that have not been sold.
+-- 5. List the amount paid by each customer.
+-- 6. How many orders have been placed by Herkku Gifts?
+-- 7. Who are the employees in Boston?
+-- 8. Report those payments greater than $100,000. Sort the report so the customer who made the highest payment appears first.
+-- 9. List the value of 'On Hold' orders.
+-- 10. Report the number of orders 'On Hold' for each customer.
