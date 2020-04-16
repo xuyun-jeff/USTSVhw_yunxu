@@ -53,10 +53,26 @@ ORDER BY orderNumber;
 
 -- $One to many relationship$
 -- 1. Report the account representative for each customer.
+SELECT customerNumber, customerName, CONCAT(firstName,' ', lastName) AS employeeName FROM employees JOIN customers
+ON customers.salesRepEmployeeNumber = employees.employeeNumber;
 -- 2. Report total payments for Atelier graphique.
+SELECT SUM(amount) FROM payments JOIN customers
+ON customers.customerNumber = payments.customerNumber
+WHERE customerName = "Atelier graphique";
 -- 3. Report the total payments by date
+SELECT SUM(amount), paymentDate FROM payments
+GROUP BY paymentDate
+ORDER BY paymentDate;
 -- 4. Report the products that have not been sold.
+SELECT * FROM products 
+WHERE productCode NOT IN (SELECT products.productCode FROM products JOIN orderdetails ON products.productCode = orderdetails.productCode);
+-- OR another way I think
+SELECT * FROM products 
+WHERE productCode NOT IN (SELECT orderdetails.productCode FROM orderdetails);
 -- 5. List the amount paid by each customer.
+SELECT customerName, SUM(amount) FROM payments JOIN customers
+ON payments.customerNumber = customers.customerNumber
+GROUP BY customerName;
 -- 6. How many orders have been placed by Herkku Gifts?
 -- 7. Who are the employees in Boston?
 -- 8. Report those payments greater than $100,000. Sort the report so the customer who made the highest payment appears first.
