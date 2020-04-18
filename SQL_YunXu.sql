@@ -74,7 +74,30 @@ SELECT customerName, SUM(amount) FROM payments JOIN customers
 ON payments.customerNumber = customers.customerNumber
 GROUP BY customerName;
 -- 6. How many orders have been placed by Herkku Gifts?
+SELECT COUNT(*) FROM orders 
+JOIN customers on orders.customerNumber = customers.customerNumber
+WHERE customerName = "Herkku Gifts";
+-- How many products have been ordered by Herkku Gifts?
+SELECT SUM(quantityOrdered) as Total FROM orderdetails 
+JOIN orders ON orderdetails.orderNumber = orders.orderNumber
+JOIN customers ON orders.customerNumber = customers.customerNumber
+WHERE customerName = "Herkku Gifts";
 -- 7. Who are the employees in Boston?
+SELECT employeeNumber, lastName, firstName FROM employees 
+JOIN customers ON employees.employeeNumber = customers.salesRepEmployeeNumber
+WHERE city = "Boston";
 -- 8. Report those payments greater than $100,000. Sort the report so the customer who made the highest payment appears first.
+SELECT customerName, SUM(amount) FROM payments
+JOIN customers ON payments.customerNumber = customers.customerNumber
+GROUP BY customerName
+HAVING SUM(amount) > 100000
+ORDER BY SUM(amount) DESC; 
 -- 9. List the value of 'On Hold' orders.
+SELECT SUM(quantityOrdered*priceEach) as OrderValues FROM orderdetails
+JOIN orders ON orders.orderNumber = orderdetails.orderNumber
+WHERE status = "On Hold";
 -- 10. Report the number of orders 'On Hold' for each customer.
+SELECT customerName, COUNT(orders.customerNumber) FROM customers
+JOIN orders ON orders.customerNumber = customers.customerNumber
+WHERE status = "On Hold"
+GROUP BY orders.customerNumber;
